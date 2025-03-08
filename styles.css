@@ -58,10 +58,15 @@ button.hidden {
 
 #percentage {
     font-size: 18px;
-    color: #f39c12; /* Destaque para o número de tentativas */
 }
 
 #progress {
     font-size: 24px;
     margin-top: 10px;
+}
+
+#tentativas {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #e74c3c;
 }
