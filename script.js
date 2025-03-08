@@ -105,7 +105,7 @@ const questions = [
   },
   {
     hints: [
-      "Esta cidade está localizada no nordeste do Brasil e é conhecida por sua rica história e por ser um importante polo comercial.",
+      "Esta cidade está localizada no nordeste do Brasil e é famosa por sua rica história e por ser um importante polo comercial.",
       "É famosa pelo Mercado Central e pelo Museu do Frevo.",
       "É a capital de Alagoas."
     ],
@@ -146,7 +146,7 @@ let tentativas = 5;
 function displayQuestion() {
     const question = questions[currentQuestionIndex];
     const hint = document.getElementById('hint');
-    hint.textContent = question.hints[0];
+    hint.textContent = question.hints[0]; // Exibe a primeira dica
     document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
     document.getElementById('next-btn').classList.add('hidden');
     document.getElementById('feedback').textContent = ''; // Limpa a mensagem anterior
