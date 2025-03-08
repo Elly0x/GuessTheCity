@@ -23,7 +23,6 @@ const soundErrado = new Audio('errado.mp3');
 
 let currentQuestionIndex = 0;
 let tentativas = 5;
-let acertou = 0;  // Contador de respostas corretas
 
 function displayQuestion() {
     const question = questions[currentQuestionIndex];
@@ -31,13 +30,6 @@ function displayQuestion() {
     hint.textContent = question.hints[0];
     document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
     document.getElementById('next-btn').classList.add('hidden');
-    updateProgress();
-}
-
-function updateProgress() {
-    const percentage = Math.floor((acertou / questions.length) * 100);
-    document.getElementById('percentage').textContent = `Porcentagem: ${percentage}%`;
-    document.getElementById('progress').textContent = `${acertou}/${questions.length}`;
 }
 
 function checkAnswer() {
@@ -46,18 +38,22 @@ function checkAnswer() {
 
     if (userAnswer.toLowerCase() === question.answer.toLowerCase()) {
         document.getElementById('feedback').textContent = "Você acertou!";
+        document.getElementById('feedback').style.color = 'green'; // Cor verde para acerto
+        document.getElementById('feedback').style.fontWeight = 'bold'; // Destacar texto
         document.getElementById('next-btn').classList.remove('hidden');
         soundCorreto.play();
-        acertou++;  // Incrementa as respostas corretas
-        updateProgress();  // Atualiza a porcentagem
     } else {
         tentativas--;
         document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
         if (tentativas > 0) {
             document.getElementById('feedback').textContent = "Resposta incorreta! Tente novamente.";
+            document.getElementById('feedback').style.color = 'red'; // Cor vermelha para erro
+            document.getElementById('feedback').style.fontWeight = 'bold'; // Destacar texto
             soundErrado.play();
         } else {
             document.getElementById('feedback').textContent = `Você perdeu! A resposta correta era ${question.answer}.`;
+            document.getElementById('feedback').style.color = 'red'; // Cor vermelha para erro
+            document.getElementById('feedback').style.fontWeight = 'bold'; // Destacar texto
             soundErrado.play();
             document.getElementById('next-btn').classList.remove('hidden');
         }
