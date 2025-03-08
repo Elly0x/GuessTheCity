@@ -91,13 +91,13 @@ const questions = [
     hints: [
       "Esta cidade está localizada no centro-oeste do Brasil e é conhecida como a capital do agronegócio.",
       "É famosa pelo Mercado Municipal e pelo Parque Nacional de Chapada dos Guimarães.",
-      "É a capital de Mato Grosso."
+      "É a capital do estado de Mato Grosso."
     ],
     answer: "Cuiabá"
   },
   {
     hints: [
-      "Esta cidade está localizada no norte do Brasil e é famosa pela sua arquitetura colonial.",
+      "Esta cidade está localizada no norte do Brasil e é conhecida por sua arquitetura colonial.",
       "É a capital do estado do Acre.",
       "É uma das cidades mais conhecidas da Região Norte do Brasil."
     ],
@@ -110,22 +110,6 @@ const questions = [
       "É a capital de Alagoas."
     ],
     answer: "Maceió"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no sudeste do Brasil e é famosa pela sua importância histórica.",
-      "É conhecida pelo Museu Paulista e pelo Parque da Independência.",
-      "É a cidade onde foi proclamada a Independência do Brasil."
-    ],
-    answer: "São Bernardo do Campo"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no norte do Brasil e é conhecida por sua forte influência cultural indígena.",
-      "É famosa pelo Mercado Municipal e pela Catedral de Nossa Senhora de Nazaré.",
-      "É a capital do estado do Tocantins."
-    ],
-    answer: "Palmas"
   },
   {
     hints: [
@@ -151,77 +135,62 @@ const questions = [
     ],
     answer: "João Pessoa"
   },
-  {
-    hints: [
-      "Esta cidade está localizada no nordeste do Brasil e é famosa por suas praias.",
-      "É conhecida pela Praia de Pajuçara e pela Fortaleza de Santo Antônio.",
-      "É a capital do estado de Alagoas."
-    ],
-    answer: "Maceió"
-  }
 ];
 
+const soundCorreto = new Audio('correto.mp3');
+const soundErrado = new Audio('errado.mp3');
+
 let currentQuestionIndex = 0;
-let attempts = 0;
-let isGameOver = false;
+let tentativas = 5;
 
-const questionElement = document.getElementById("question");
-const hintElement = document.getElementById("hints");
-const answerInput = document.getElementById("answer");
-const checkButton = document.getElementById("check-btn");
-const nextButton = document.getElementById("next-btn");
-const resultMessage = document.getElementById("result");
-const attemptsElement = document.getElementById("attempts");
+function displayQuestion() {
+    const question = questions[currentQuestionIndex];
+    const hint = document.getElementById('hint');
+    hint.textContent = question.hints[0];
+    document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
+    document.getElementById('next-btn').classList.add('hidden');
+    document.getElementById('feedback').textContent = ''; // Limpa a mensagem anterior
+}
 
-const startGame = () => {
-  loadQuestion();
-};
+function checkAnswer() {
+    const question = questions[currentQuestionIndex];
+    const userAnswer = document.getElementById('answer').value.trim();
 
-const loadQuestion = () => {
-  if (currentQuestionIndex >= questions.length) {
-    resultMessage.textContent = "Fim de Jogo!";
-    nextButton.style.display = "none";
-    return;
-  }
-
-  const currentQuestion = questions[currentQuestionIndex];
-  attempts = 0;
-  isGameOver = false;
-  attemptsElement.textContent = `Tentativas: ${attempts}/5`;
-  nextButton.style.display = "none";
-  resultMessage.textContent = "";
-  answerInput.value = "";
-  
-  questionElement.textContent = "Adivinhe a cidade!";
-  hintElement.textContent = currentQuestion.hints.join(" | ");
-};
-
-const checkAnswer = () => {
-  const currentQuestion = questions[currentQuestionIndex];
-  const userAnswer = answerInput.value.trim();
-  
-  if (userAnswer.toLowerCase() === currentQuestion.answer.toLowerCase()) {
-    resultMessage.textContent = "Você acertou!";
-    resultMessage.style.color = "green";
-    nextButton.style.display = "block";
-    nextButton.disabled = false;
-  } else {
-    attempts++;
-    attemptsElement.textContent = `Tentativas: ${attempts}/5`;
-    if (attempts >= 5) {
-      resultMessage.textContent = `Você errou! A resposta era: ${currentQuestion.answer}`;
-      resultMessage.style.color = "red";
-      nextButton.style.display = "block";
+    if (userAnswer.toLowerCase() === question.answer.toLowerCase()) {
+        document.getElementById('feedback').textContent = "Você acertou!";
+        document.getElementById('feedback').style.color = 'green'; // Cor verde para acerto
+        document.getElementById('feedback').style.fontWeight = 'bold'; // Destacar texto
+        document.getElementById('next-btn').classList.remove('hidden');
+        soundCorreto.play();
+    } else {
+        tentativas--;
+        document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
+        if (tentativas > 0) {
+            document.getElementById('feedback').textContent = "Resposta incorreta! Tente novamente.";
+            document.getElementById('feedback').style.color = 'red'; // Cor vermelha para erro
+            document.getElementById('feedback').style.fontWeight = 'bold'; // Destacar texto
+            soundErrado.play();
+        } else {
+            document.getElementById('feedback').textContent = `Você perdeu! A resposta correta era ${question.answer}.`;
+            document.getElementById('feedback').style.color = 'red'; // Cor vermelha para erro
+            document.getElementById('feedback').style.fontWeight = 'bold'; // Destacar texto
+            soundErrado.play();
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
     }
-  }
-};
+}
 
-const nextQuestion = () => {
-  currentQuestionIndex++;
-  loadQuestion();
-};
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        tentativas = 5;
+        displayQuestion();
+        document.getElementById('answer').value = '';
+    } else {
+        document.getElementById('feedback').textContent = "Fim do jogo!";
+        document.getElementById('next-btn').classList.add('hidden');
+    }
+}
 
-checkButton.addEventListener("click", checkAnswer);
-nextButton.addEventListener("click", nextQuestion);
-
-startGame();
+// Inicia o jogo com a primeira pergunta
+displayQuestion();
