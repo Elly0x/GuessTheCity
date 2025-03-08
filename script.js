@@ -1,106 +1,70 @@
 const questions = [
-    {
-        hints: [
-            "Esta cidade está localizada na América do Sul e é a capital da Argentina.",
-            "É famosa pelo tango e pelo bairro colorido de La Boca.",
-            "O time de futebol Boca Juniors, um dos mais conhecidos do mundo, nasceu aqui."
-        ],
-        answer: "Buenos Aires"
-    },
-    {
-        hints: [
-            "Esta cidade está localizada no Peru e foi a capital do Império Inca.",
-            "É famosa pela Plaza de Armas e por ser a porta de entrada para Machu Picchu.",
-            "É uma das cidades mais turísticas do Peru."
-        ],
-        answer: "Cusco"
-    },
-    // Adicione as demais cidades aqui
+  {
+    hints: [
+      "Esta cidade está localizada na América do Sul e é a capital da Argentina.",
+      "É famosa pelo tango e pelo bairro colorido de La Boca.",
+      "O time de futebol Boca Juniors, um dos mais conhecidos do mundo, nasceu aqui."
+    ],
+    answer: "Buenos Aires"
+  },
+  {
+    hints: [
+      "Esta cidade está localizada no Peru e foi a capital do Império Inca.",
+      "É famosa pela Plaza de Armas e por ser a porta de entrada para Machu Picchu.",
+      "É uma das cidades mais turísticas do Peru."
+    ],
+    answer: "Cusco"
+  },
+  // Adicione todas as outras cidades aqui...
 ];
 
+const soundCorreto = new Audio('correto.mp3');
+const soundErrado = new Audio('errado.mp3');
+
 let currentQuestionIndex = 0;
-let attemptsLeft = 5; // Número de tentativas
-let hintsIndex = 0; // Índice das dicas
+let tentativas = 5;
 
-// Carregando os sons
-const correctSound = new Audio('assets/correct.mp3');
-const wrongSound = new Audio('assets/wrong.mp3');
-
-// Verifica se o som foi carregado corretamente
-correctSound.onload = function() {
-    console.log("Sons de acerto carregados corretamente.");
-};
-correctSound.onerror = function() {
-    console.log("Erro ao carregar o som de acerto.");
-};
-
-wrongSound.onload = function() {
-    console.log("Sons de erro carregados corretamente.");
-};
-wrongSound.onerror = function() {
-    console.log("Erro ao carregar o som de erro.");
-};
-
-// Função para tocar som de acerto
-function playCorrectSound() {
-    console.log("Tocando som de acerto...");
-    correctSound.play().catch(error => {
-        console.error("Erro ao tentar tocar o som de acerto:", error);
-    });
+function displayQuestion() {
+    const question = questions[currentQuestionIndex];
+    const hint = document.getElementById('hint');
+    hint.textContent = question.hints[0];
+    document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
+    document.getElementById('next-btn').classList.add('hidden');
 }
 
-// Função para tocar som de erro
-function playWrongSound() {
-    console.log("Tocando som de erro...");
-    wrongSound.play().catch(error => {
-        console.error("Erro ao tentar tocar o som de erro:", error);
-    });
-}
-
-// Exibe a dica atual
-function displayHint() {
-    document.getElementById('hint').textContent = questions[currentQuestionIndex].hints[hintsIndex];
-    document.getElementById('percentage').textContent = `Tentativas restantes: ${attemptsLeft}`;
-}
-
-// Função chamada ao clicar no botão de verificar resposta
 function checkAnswer() {
+    const question = questions[currentQuestionIndex];
     const userAnswer = document.getElementById('answer').value.trim();
-    const correctAnswer = questions[currentQuestionIndex].answer;
 
-    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-        document.getElementById('feedback').textContent = "Resposta correta!";
-        playCorrectSound(); // Toca o som de acerto
-        document.getElementById('next-btn').classList.remove('hidden'); // Exibe o botão de próxima pergunta
+    if (userAnswer.toLowerCase() === question.answer.toLowerCase()) {
+        document.getElementById('feedback').textContent = "Você acertou!";
+        document.getElementById('next-btn').classList.remove('hidden');
+        soundCorreto.play();
     } else {
-        attemptsLeft--; // Decrementa o número de tentativas
-        document.getElementById('feedback').textContent = `Resposta incorreta! Tente novamente.`;
-        playWrongSound(); // Toca o som de erro
-
-        if (attemptsLeft > 0) {
-            hintsIndex++; // Exibe a próxima dica
-            displayHint(); // Atualiza a dica
+        tentativas--;
+        document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
+        if (tentativas > 0) {
+            document.getElementById('feedback').textContent = "Resposta incorreta! Tente novamente.";
+            soundErrado.play();
         } else {
-            document.getElementById('feedback').textContent = `Você perdeu todas as tentativas! A resposta correta era: ${correctAnswer}`;
-            document.getElementById('next-btn').classList.remove('hidden'); // Exibe o botão de próxima pergunta
+            document.getElementById('feedback').textContent = `Você perdeu! A resposta correta era ${question.answer}.`;
+            soundErrado.play();
+            document.getElementById('next-btn').classList.remove('hidden');
         }
     }
 }
 
-// Função para ir para a próxima pergunta
 function nextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex++;
-        attemptsLeft = 5; // Resetando as tentativas
-        hintsIndex = 0; // Resetando as dicas
-        displayHint(); // Exibindo a primeira dica
-        document.getElementById('answer').value = ''; // Limpando o campo de resposta
-        document.getElementById('feedback').textContent = ''; // Limpando feedback
-        document.getElementById('next-btn').classList.add('hidden'); // Escondendo o botão de próxima pergunta
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        tentativas = 5;
+        displayQuestion();
+        document.getElementById('answer').value = '';
+        document.getElementById('feedback').textContent = '';
     } else {
-        document.getElementById('feedback').textContent = "Você completou todas as perguntas!";
+        document.getElementById('feedback').textContent = "Fim do jogo!";
     }
 }
 
-// Inicializa a primeira dica
-displayHint();
+// Inicia o jogo com a primeira pergunta
+displayQuestion();
