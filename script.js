@@ -209,3 +209,25 @@ const questions = [
     answer: "Madrid"
   }
 ];
+
+let currentQuestionIndex = 0;
+let attempts = 0;
+
+const questionElement = document.getElementById("question");
+const hintElement = document.getElementById("hints");
+const answerInput = document.getElementById("answer");
+const checkButton = document.getElementById("check-btn");
+const nextButton = document.getElementById("next-btn");
+const resultMessage = document.getElementById("result");
+const attemptsElement = document.getElementById("attempts");
+
+const startGame = () => {
+  loadQuestion();
+};
+
+const loadQuestion = () => {
+  attempts = 0;
+  attemptsElement.textContent = `Tentativas: ${attempts}/5`;
+  nextButton.style.display = "none";
+  resultMessage.textContent = "";
+  nextButton.disabled = false;
