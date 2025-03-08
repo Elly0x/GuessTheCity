@@ -56,31 +56,8 @@ function checkAnswer() {
     }
 
     // Atualizar a porcentagem
-    progressElement.textContent = progress;
+    progressElement.textContent = "Progresso: " + progress + "%";
 
     // Esconder o campo de resposta e mostrar o botão de próxima pergunta
     document.getElementById("answer").classList.add("hidden");
-    document.querySelector("button").classList.add("hidden");
-    nextBtn.classList.remove("hidden");
-    document.getElementById("percentage").classList.remove("hidden");
-}
-
-function nextQuestion() {
-    currentQuestion++;
-    if (currentQuestion < questions.length) {
-        document.getElementById("hint").textContent = "Dica: " + questions[currentQuestion].hint;
-        document.getElementById("answer").value = "";
-        document.getElementById("feedback").innerText = "";
-
-        // Mostrar os campos novamente
-        document.getElementById("answer").classList.remove("hidden");
-        document.querySelector("button").classList.remove("hidden");
-        document.getElementById("next-btn").classList.add("hidden");
-    } else {
-        document.getElementById("hint").textContent = "Fim de jogo! Você acertou " + correctAnswers + " de " + questions.length + " perguntas.";
-        document.getElementById("next-btn").classList.add("hidden");
-    }
-}
-
-// const fimJogoAudio = new Audio('fim_jogo.mp3');
-// fimJogoAudio.play();
+    document.querySelector("button").classList.add("
