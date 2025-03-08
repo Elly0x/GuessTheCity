@@ -81,6 +81,3 @@ function nextQuestion() {
         document.getElementById("next-btn").classList.add("hidden");
     }
 }
-
-// const fimJogoAudio = new Audio('fim_jogo.mp3');
-// fimJogoAudio.play();
