@@ -1,73 +1,67 @@
 let currentQuestionIndex = 0;
-let currentHintIndex = 0;
-let score = 0;
-let attempts = 0; // Contador de tentativas
+let attemptsLeft = 5;  // Número de tentativas
+let currentHintIndex = 0;  // Índice da dica atual
 
 const questions = [
-  {
-    hints: [
-      "Esta cidade está localizada na América do Sul e é a capital da Argentina.",
-      "É famosa pelo tango e pelo bairro colorido de La Boca.",
-      "O time de futebol Boca Juniors, um dos mais conhecidos do mundo, nasceu aqui."
-    ],
-    answer: "Buenos Aires"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na América do Sul e é conhecida como a 'Cidade Maravilhosa'.",
-      "É famosa pelo Cristo Redentor.",
-      "Foi sede dos Jogos Olímpicos de 2016"
-    ],
-    answer: "Rio de Janeiro"
-  },
-  // Adicione mais cidades aqui...
+    // Seu array de questões
 ];
 
 function displayHint() {
-  const hintElement = document.getElementById("hint");
-  hintElement.textContent = questions[currentQuestionIndex].hints[currentHintIndex];
+    const hintElement = document.getElementById("hint");
+    hintElement.textContent = questions[currentQuestionIndex].hints[currentHintIndex];
+}
+
+function updateAttempts() {
+    const attemptsElement = document.getElementById("attempts");
+    attemptsElement.textContent = `Tentativas restantes: ${attemptsLeft}`;
 }
 
 function checkAnswer() {
-  const userAnswer = document.getElementById("answer").value.trim();
-  const correctAnswer = questions[currentQuestionIndex].answer;
+    const answer = document.getElementById("answer").value.trim().toLowerCase();
+    const feedbackElement = document.getElementById("feedback");
 
-  if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-    document.getElementById("feedback").textContent = "Parabéns, você acertou!";
-    score += 1;
-    document.getElementById("percentage").textContent = `Porcentagem: ${(score / questions.length) * 100}%`;
-    document.getElementById("next-btn").classList.remove("hidden");  // O botão "Próxima pergunta" só aparece quando acertar
-  } else {
-    attempts += 1; // Incrementa o contador de tentativas
-    document.getElementById("feedback").textContent = `Resposta errada, você tem ${5 - attempts} tentativas restantes.`;
-    
-    if (attempts >= 5) {
-      // Se as tentativas se esgotarem
-      document.getElementById("feedback").textContent = `Você não conseguiu! A resposta era: ${correctAnswer}`;
-      document.getElementById("next-btn").classList.remove("hidden"); // O botão "Próxima pergunta" aparece
+    if (answer === questions[currentQuestionIndex].answer.toLowerCase()) {
+        feedbackElement.textContent = "Resposta correta!";
+        feedbackElement.style.color = "green";
+        document.getElementById("next-btn").classList.remove("hidden");
+        document.getElementById("next-btn").disabled = false;  // Habilitar o botão para próxima pergunta
     } else {
-      // Caso o jogador ainda tenha tentativas
-      currentHintIndex += 1;
-      if (currentHintIndex < questions[currentQuestionIndex].hints.length) {
-        displayHint(); // Mostra a próxima dica
-      }
+        attemptsLeft--;
+        updateAttempts();
+        
+        if (attemptsLeft > 0) {
+            feedbackElement.textContent = "Resposta incorreta. Tente novamente!";
+            feedbackElement.style.color = "red";
+            currentHintIndex++;  // Mostrar a próxima dica
+            displayHint();
+        } else {
+            feedbackElement.textContent = "Você esgotou suas tentativas!";
+            feedbackElement.style.color = "red";
+            document.getElementById("next-btn").classList.remove("hidden");
+            document.getElementById("next-btn").disabled = false;
+        }
     }
-  }
 }
 
 function nextQuestion() {
-  currentQuestionIndex += 1;
-  currentHintIndex = 0;
-  attempts = 0; // Reseta o contador de tentativas
-  if (currentQuestionIndex < questions.length) {
-    displayHint(); // Exibe a primeira dica da próxima pergunta
-    document.getElementById("answer").value = ""; // Limpa o campo de resposta
-    document.getElementById("feedback").textContent = ""; // Limpa o feedback
-    document.getElementById("next-btn").classList.add("hidden"); // Esconde o botão "Próxima pergunta" até que o jogador acerte
-  } else {
-    document.getElementById("feedback").textContent = "Você completou todas as perguntas! Sua pontuação final é " + score;
-    document.getElementById("next-btn").classList.add("hidden"); // Esconde o botão ao final do jogo
-  }
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        attemptsLeft = 5;  // Resetar tentativas
+        currentHintIndex = 0;  // Resetar índice das dicas
+        document.getElementById("next-btn").classList.add("hidden");
+        document.getElementById("answer").value = "";  // Limpar o campo de resposta
+        updateAttempts();
+        displayHint();
+        document.getElementById("feedback").textContent = "";
+    } else {
+        document.getElementById("feedback").textContent = "Você completou todas as perguntas!";
+        document.getElementById("feedback").style.color = "blue";
+        document.getElementById("next-btn").classList.add("hidden");
+    }
 }
 
-displayHint(); // Exibe a primeira dica ao carregar o jogo
+// Iniciar com a primeira dica e as tentativas
+window.onload = function() {
+    displayHint();
+    updateAttempts();
+};
