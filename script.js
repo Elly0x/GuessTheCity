@@ -142,11 +142,12 @@ const soundErrado = new Audio('errado.mp3');
 
 let currentQuestionIndex = 0;
 let tentativas = 5;
+let currentHintIndex = 0;
 
 function displayQuestion() {
     const question = questions[currentQuestionIndex];
     const hint = document.getElementById('hint');
-    hint.textContent = question.hints[0]; // Exibe a primeira dica
+    hint.textContent = question.hints[currentHintIndex]; // Exibe a primeira dica
     document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
     document.getElementById('next-btn').classList.add('hidden');
     document.getElementById('feedback').textContent = ''; // Limpa a mensagem anterior
@@ -166,6 +167,12 @@ function checkAnswer() {
         tentativas--;
         document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
         if (tentativas > 0) {
+            currentHintIndex++; // Avança para a próxima dica
+            if (currentHintIndex < question.hints.length) {
+                document.getElementById('hint').textContent = question.hints[currentHintIndex]; // Exibe a próxima dica
+            } else {
+                document.getElementById('hint').textContent = "Sem mais dicas!";
+            }
             document.getElementById('feedback').textContent = "Resposta incorreta! Tente novamente.";
             document.getElementById('feedback').style.color = 'red'; // Cor vermelha para erro
             document.getElementById('feedback').style.fontWeight = 'bold'; // Destacar texto
@@ -182,6 +189,7 @@ function checkAnswer() {
 
 function nextQuestion() {
     currentQuestionIndex++;
+    currentHintIndex = 0; // Reseta para a primeira dica
     if (currentQuestionIndex < questions.length) {
         tentativas = 5;
         displayQuestion();
