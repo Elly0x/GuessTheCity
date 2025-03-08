@@ -30,6 +30,7 @@ function displayQuestion() {
     hint.textContent = question.hints[0];
     document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
     document.getElementById('next-btn').classList.add('hidden');
+    document.getElementById('feedback').textContent = ''; // Limpa a mensagem anterior
 }
 
 function checkAnswer() {
@@ -66,9 +67,9 @@ function nextQuestion() {
         tentativas = 5;
         displayQuestion();
         document.getElementById('answer').value = '';
-        document.getElementById('feedback').textContent = '';
     } else {
         document.getElementById('feedback').textContent = "Fim do jogo!";
+        document.getElementById('next-btn').classList.add('hidden');
     }
 }
 
