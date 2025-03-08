@@ -22,6 +22,20 @@ let currentQuestionIndex = 0;
 let attemptsLeft = 5; // Número de tentativas
 let hintsIndex = 0; // Índice das dicas
 
+// Carregando os sons
+const correctSound = new Audio('assets/correct.mp3');
+const wrongSound = new Audio('assets/wrong.mp3');
+
+// Função para tocar som de acerto
+function playCorrectSound() {
+    correctSound.play();
+}
+
+// Função para tocar som de erro
+function playWrongSound() {
+    wrongSound.play();
+}
+
 // Exibe a dica atual
 function displayHint() {
     document.getElementById('hint').textContent = questions[currentQuestionIndex].hints[hintsIndex];
@@ -35,10 +49,12 @@ function checkAnswer() {
 
     if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
         document.getElementById('feedback').textContent = "Resposta correta!";
+        playCorrectSound(); // Toca o som de acerto
         document.getElementById('next-btn').classList.remove('hidden'); // Exibe o botão de próxima pergunta
     } else {
         attemptsLeft--; // Decrementa o número de tentativas
         document.getElementById('feedback').textContent = `Resposta incorreta! Tente novamente.`;
+        playWrongSound(); // Toca o som de erro
 
         if (attemptsLeft > 0) {
             hintsIndex++; // Exibe a próxima dica
