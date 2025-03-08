@@ -9,13 +9,14 @@
 <body>
     <div class="container">
         <h1>Guess The City</h1>
-        <div id="hint" class="hint">Dica: </div>
-        <div id="feedback" class="feedback"></div>
-        <input type="text" id="answer" placeholder="Digite sua resposta" />
+        <p id="hint">Dica: A cidade...</p>
+        <input type="text" id="answer" placeholder="Digite sua resposta" autofocus>
         <button onclick="checkAnswer()">Verificar</button>
-        <button id="next-btn" onclick="nextQuestion()" class="hidden">Próxima Pergunta</button>
-        <div id="percentage" class="percentage">Progresso: <span id="progress">0</span>%</div>
+        <p id="feedback"></p>
+        <button id="next-btn" class="hidden" onclick="nextQuestion()">Próxima</button>
+        <p id="percentage"></p>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
