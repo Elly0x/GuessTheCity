@@ -58,19 +58,11 @@ button.hidden {
 
 #percentage {
     font-size: 18px;
-    color: #f39c12;  /* Destaque para tentativas restantes */
+    color: #f39c12; /* Altere a cor para destacar */
 }
 
 #progress {
     font-size: 24px;
     margin-top: 10px;
-}
-
-#hint {
-    font-size: 18px;
-    color: #f39c12;  /* Destaque para as dicas */
-}
-
-#answer {
-    font-size: 18px;
+    color: #e74c3c; /* Cor do progresso (vermelho) */
 }
