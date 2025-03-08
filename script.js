@@ -167,7 +167,7 @@ const questions = [
     ],
     answer: "Florianópolis"
   },
-  // Cidades novas adicionadas
+  // Cidades internacionais
   {
     hints: [
       "Esta cidade está localizada na Grécia e é considerada o berço da civilização ocidental.",
@@ -212,6 +212,7 @@ const questions = [
 
 let currentQuestionIndex = 0;
 let attempts = 0;
+let isGameOver = false;
 
 const questionElement = document.getElementById("question");
 const hintElement = document.getElementById("hints");
@@ -226,8 +227,35 @@ const startGame = () => {
 };
 
 const loadQuestion = () => {
+  if (currentQuestionIndex >= questions.length) {
+    resultMessage.textContent = "Fim de Jogo!";
+    nextButton.style.display = "none";
+    return;
+  }
+
+  const currentQuestion = questions[currentQuestionIndex];
   attempts = 0;
+  isGameOver = false;
   attemptsElement.textContent = `Tentativas: ${attempts}/5`;
   nextButton.style.display = "none";
   resultMessage.textContent = "";
-  nextButton.disabled = false;
+  answerInput.value = "";
+  
+  questionElement.textContent = currentQuestion.hints[0];
+  hintElement.textContent = currentQuestion.hints.join(" | ");
+};
+
+const checkAnswer = () => {
+  const currentQuestion = questions[currentQuestionIndex];
+  const userAnswer = answerInput.value.trim();
+  
+  if (userAnswer.toLowerCase() === currentQuestion.answer.toLowerCase()) {
+    resultMessage.textContent = "Você acertou!";
+    resultMessage.style.color = "green";
+    nextButton.style.display = "block";
+    nextButton.disabled = false;
+  } else {
+    attempts++;
+    attemptsElement.textContent = `Tentativas: ${attempts}/5`;
+    if (attempts >= 5) {
+      resultMessage.textContent = "Você errou! Fim de J
