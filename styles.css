@@ -52,21 +52,7 @@ button.hidden {
     font-size: 18px;
 }
 
-#progress-container {
-    margin-top: 20px;
-}
-
-#percentage {
-    font-size: 18px;
-}
-
-#progress {
-    font-size: 24px;
-    margin-top: 10px;
-}
-
 #tentativas {
     font-size: 18px;
-    margin-top: 20px;
-    color: #e74c3c;
+    margin-top: 10px;
 }
