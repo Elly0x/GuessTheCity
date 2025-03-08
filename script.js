@@ -35,6 +35,7 @@ let progress = 0;
 const corretoAudio = new Audio('correto.mp3');
 const erradoAudio = new Audio('errado.mp3');
 
+// Atualiza a dica na primeira execução
 document.getElementById("hint").textContent = "Dica: " + questions[currentQuestion].hint;
 
 function checkAnswer() {
@@ -47,3 +48,37 @@ function checkAnswer() {
         feedback.innerHTML = "✅ Correto!";
         feedback.style.color = "green";
         corretoAudio.play();
+        correctAnswers++;
+        progress += 10;
+    } else {
+        feedback.innerHTML = "❌ Errado! A resposta era: " + questions[currentQuestion].answer;
+        feedback.style.color = "red";
+        erradoAudio.play();
+    }
+
+    // Atualizar a porcentagem
+    progressElement.textContent = "Progresso: " + progress + "%";
+
+    // Esconder o campo de resposta e mostrar o botão de próxima pergunta
+    document.getElementById("answer").classList.add("hidden");
+    document.querySelector("button").classList.add("hidden");
+    nextBtn.classList.remove("hidden");
+    document.getElementById("percentage").classList.remove("hidden");
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        document.getElementById("hint").textContent = "Dica: " + questions[currentQuestion].hint;
+        document.getElementById("answer").value = "";
+        document.getElementById("feedback").innerText = "";
+
+        // Mostrar os campos novamente
+        document.getElementById("answer").classList.remove("hidden");
+        document.querySelector("button").classList.remove("hidden");
+        document.getElementById("next-btn").classList.add("hidden");
+    } else {
+        document.getElementById("hint").textContent = "Fim de jogo! Você acertou " + correctAnswers + " de " + questions.length + " perguntas.";
+        document.getElementById("next-btn").classList.add("hidden");
+    }
+}
