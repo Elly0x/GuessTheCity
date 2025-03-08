@@ -26,14 +26,35 @@ let hintsIndex = 0; // Índice das dicas
 const correctSound = new Audio('assets/correct.mp3');
 const wrongSound = new Audio('assets/wrong.mp3');
 
+// Verifica se o som foi carregado corretamente
+correctSound.onload = function() {
+    console.log("Sons de acerto carregados corretamente.");
+};
+correctSound.onerror = function() {
+    console.log("Erro ao carregar o som de acerto.");
+};
+
+wrongSound.onload = function() {
+    console.log("Sons de erro carregados corretamente.");
+};
+wrongSound.onerror = function() {
+    console.log("Erro ao carregar o som de erro.");
+};
+
 // Função para tocar som de acerto
 function playCorrectSound() {
-    correctSound.play();
+    console.log("Tocando som de acerto...");
+    correctSound.play().catch(error => {
+        console.error("Erro ao tentar tocar o som de acerto:", error);
+    });
 }
 
 // Função para tocar som de erro
 function playWrongSound() {
-    wrongSound.play();
+    console.log("Tocando som de erro...");
+    wrongSound.play().catch(error => {
+        console.error("Erro ao tentar tocar o som de erro:", error);
+    });
 }
 
 // Exibe a dica atual
