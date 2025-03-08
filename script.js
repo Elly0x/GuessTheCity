@@ -1,31 +1,31 @@
 const questions = [
-    { hint: "Esta cidade é famosa por uma torre que foi projetada para ser temporária, mas acabou se tornando um ícone mundial.", answer: "Paris" },
-    { hint: "Conhecida por ser a sede de uma das 7 maravilhas do mundo antigo e pelas pirâmides.", answer: "Cairo" },
-    { hint: "Esta cidade é conhecida por sua cultura e arquitetura antigas, além de ser famosa por seus canais.", answer: "Veneza" },
-    { hint: "Aqui você pode encontrar a famosa estátua da liberdade e arranha-céus icônicos.", answer: "Nova York" },
-    { hint: "Esta cidade tem a maior muralha de todos os tempos e é um centro político e cultural no leste asiático.", answer: "Pequim" },
-    { hint: "Essa cidade é conhecida por suas gôndolas e pontes, além de ser uma das mais românticas do mundo.", answer: "Veneza" },
-    { hint: "Essa cidade tem uma história de império que deixou sua marca por todo o continente americano.", answer: "Cidade do México" },
-    { hint: "Famosa pela tecnologia, arquitetura futurista e cultura pop, é a maior cidade do Japão.", answer: "Tóquio" },
-    { hint: "Essa cidade abriga o maior anfiteatro da Roma Antiga e um dos maiores impérios da história.", answer: "Roma" },
-    { hint: "Famosa pela roda gigante de London Eye e pela Torre de Londres, além do Big Ben.", answer: "Londres" },
-    { hint: "Cidade famosa por sua arquitetura medieval e pela Sagrada Família, uma obra inacabada de Gaudí.", answer: "Barcelona" },
-    { hint: "Essa cidade foi a sede do Império Inca e está localizada nos Andes.", answer: "Cusco" },
-    { hint: "Essa cidade está localizada na Rússia e é famosa por sua história durante a guerra e sua Praça Vermelha.", answer: "Moscou" },
-    { hint: "Essa cidade australiana é conhecida pela sua famosa ópera e a Harbour Bridge.", answer: "Sydney" },
-    { hint: "Conhecida pela sua culinária e pelo movimento de renascimento cultural, é a cidade que tem a famosa Torre Inclinada.", answer: "Pisa" },
-    { hint: "Essa cidade foi a primeira a abrigar os Jogos Olímpicos Modernos, e é considerada o berço da civilização ocidental.", answer: "Atenas" },
-    { hint: "Com sua enorme baía e tradição marítima, essa cidade é conhecida pela imponente Torre de Cristal.", answer: "Santiago" },
-    { hint: "Conhecida por sua natureza selvagem e a biodiversidade única, esta cidade é a capital da maior floresta tropical do mundo.", answer: "Manaus" },
-    { hint: "Cidade que já foi o centro de impérios coloniais e é famosa por sua arquitetura colonial e seus bairros vibrantes.", answer: "Buenos Aires" },
-    { hint: "Cidade com uma das mais antigas universidades do mundo e localizada em uma das capitais mais antigas da Europa.", answer: "Praga" },
-    { hint: "Essa cidade asiática é famosa por seu templo budista e pela arquitetura clássica que remonta à antiga capital do Sião.", answer: "Bangkok" },
-    { hint: "É a maior cidade do Brasil e um centro financeiro importante, com uma das maiores populações do mundo.", answer: "São Paulo" },
-    { hint: "Essa cidade é conhecida mundialmente pelo seu enorme Cristo Redentor e pelas praias de Copacabana e Ipanema.", answer: "Rio de Janeiro" },
-    { hint: "Cidade famosa por sua grande ponte vermelha e pelos seus aclamados bairros e paisagens, com uma vista panorâmica da cidade.", answer: "São Francisco" },
-    { hint: "Esta cidade na Ásia é conhecida pela sua vida noturna vibrante e pela arquitetura moderna que mistura o antigo e o novo.", answer: "Hong Kong" },
-    { hint: "A capital espanhola é um centro cultural conhecido pelas suas grandes praças e avenidas, além de ser famosa pela sua gastronomia.", answer: "Madrid" },
-    { hint: "Cidade famosa por sua história medieval e castelos, bem como por sua cultura de cerveja e seus pontes espetaculares.", answer: "Praga" }
+    { hint: "Famosa pela Torre Eiffel.", answer: "Paris" },
+    { hint: "Sede das pirâmides e uma das 7 maravilhas.", answer: "Cairo" },
+    { hint: "Canais e arquitetura renascentista.", answer: "Veneza" },
+    { hint: "Estátua da Liberdade e arranha-céus.", answer: "Nova York" },
+    { hint: "A maior muralha do mundo.", answer: "Pequim" },
+    { hint: "Conhecida por suas gôndolas e pontes.", answer: "Veneza" },
+    { hint: "Centro de um antigo império americano.", answer: "Cidade do México" },
+    { hint: "Cidade futurista do Japão.", answer: "Tóquio" },
+    { hint: "Anfiteatro romano e império histórico.", answer: "Roma" },
+    { hint: "Big Ben e a Torre de Londres.", answer: "Londres" },
+    { hint: "Sagrada Família e arquitetura de Gaudí.", answer: "Barcelona" },
+    { hint: "Sede do Império Inca nos Andes.", answer: "Cusco" },
+    { hint: "Praça Vermelha e história da guerra.", answer: "Moscou" },
+    { hint: "Ópera e Harbour Bridge.", answer: "Sydney" },
+    { hint: "Torre inclinada e culinária renascentista.", answer: "Pisa" },
+    { hint: "Berço dos Jogos Olímpicos e da civilização.", answer: "Atenas" },
+    { hint: "Baía grande e Torre de Cristal.", answer: "Santiago" },
+    { hint: "Floresta tropical e biodiversidade.", answer: "Manaus" },
+    { hint: "Arquitetura colonial e bairros vibrantes.", answer: "Buenos Aires" },
+    { hint: "Antiga universidade e cultura medieval.", answer: "Praga" },
+    { hint: "Templo budista e arquitetura clássica.", answer: "Bangkok" },
+    { hint: "Maior cidade do Brasil e centro financeiro.", answer: "São Paulo" },
+    { hint: "Cristo Redentor e praias famosas.", answer: "Rio de Janeiro" },
+    { hint: "Ponte vermelha e paisagens famosas.", answer: "São Francisco" },
+    { hint: "Vida noturna vibrante e arquitetura moderna.", answer: "Hong Kong" },
+    { hint: "Praças e gastronomia renomada.", answer: "Madrid" },
+    { hint: "Castelos medievais e cerveja.", answer: "Praga" }
 ];
 
 let currentQuestion = 0;
@@ -35,7 +35,6 @@ let progress = 0;
 const corretoAudio = new Audio('correto.mp3');
 const erradoAudio = new Audio('errado.mp3');
 
-// Atualiza a dica na primeira execução
 document.getElementById("hint").textContent = "Dica: " + questions[currentQuestion].hint;
 
 function checkAnswer() {
@@ -57,7 +56,7 @@ function checkAnswer() {
     }
 
     // Atualizar a porcentagem
-    progressElement.textContent = "Progresso: " + progress + "%";
+    progressElement.textContent = progress;
 
     // Esconder o campo de resposta e mostrar o botão de próxima pergunta
     document.getElementById("answer").classList.add("hidden");
@@ -82,3 +81,6 @@ function nextQuestion() {
         document.getElementById("next-btn").classList.add("hidden");
     }
 }
+
+// const fimJogoAudio = new Audio('fim_jogo.mp3');
+// fimJogoAudio.play();
