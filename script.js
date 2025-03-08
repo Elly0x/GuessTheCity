@@ -7,19 +7,19 @@ const questions = [
     ],
     answer: "Buenos Aires"
   },
-  // ... (outros itens do array de perguntas)
   {
     hints: [
-      "Esta cidade está localizada na Espanha e é a capital do país.",
-      "É famosa pelo Museu do Prado e pela Praça Maior.",
-      "É conhecida pelo Real Madrid, um dos maiores clubes de futebol do mundo."
+      "Esta cidade está localizada no Peru e foi a capital do Império Inca.",
+      "É famosa pela Plaza de Armas e por ser a porta de entrada para Machu Picchu.",
+      "É uma das cidades mais turísticas do Peru."
     ],
-    answer: "Madrid"
-  }
+    answer: "Cusco"
+  },
+  // ... (outras perguntas aqui)
 ];
 
 let currentQuestionIndex = 0;
-let attemptsLeft = 5; // Definindo número de tentativas
+let attemptsLeft = 5; // Tentativas
 let hintsIndex = 0;
 
 function displayHint() {
@@ -35,21 +35,20 @@ function checkAnswer() {
         document.getElementById('feedback').textContent = "Resposta correta!";
         document.getElementById('next-btn').classList.remove('hidden'); // Mostrar o botão "Próxima pergunta"
     } else {
-        attemptsLeft--;
+        attemptsLeft--; // Decrementar tentativas
         document.getElementById('feedback').textContent = `Resposta incorreta! Tente novamente.`;
-        
+
         if (attemptsLeft > 0) {
             hintsIndex++; // Exibe próxima dica
-            displayHint();
+            displayHint(); // Exibe a próxima dica
         } else {
-            document.getElementById('feedback').textContent = "Você perdeu! A resposta correta era: " + correctAnswer;
+            document.getElementById('feedback').textContent = "Você perdeu todas as tentativas! A resposta correta era: " + correctAnswer;
             document.getElementById('next-btn').classList.remove('hidden'); // Mostrar o botão "Próxima pergunta"
         }
     }
 }
 
 function nextQuestion() {
-    // Resetando o estado do jogo
     if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
         attemptsLeft = 5; // Resetando tentativas
