@@ -23,6 +23,7 @@ const soundErrado = new Audio('errado.mp3');
 
 let currentQuestionIndex = 0;
 let tentativas = 5;
+let acertou = 0;  // Contador de respostas corretas
 
 function displayQuestion() {
     const question = questions[currentQuestionIndex];
@@ -30,6 +31,13 @@ function displayQuestion() {
     hint.textContent = question.hints[0];
     document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
     document.getElementById('next-btn').classList.add('hidden');
+    updateProgress();
+}
+
+function updateProgress() {
+    const percentage = Math.floor((acertou / questions.length) * 100);
+    document.getElementById('percentage').textContent = `Porcentagem: ${percentage}%`;
+    document.getElementById('progress').textContent = `${acertou}/${questions.length}`;
 }
 
 function checkAnswer() {
@@ -40,6 +48,8 @@ function checkAnswer() {
         document.getElementById('feedback').textContent = "Você acertou!";
         document.getElementById('next-btn').classList.remove('hidden');
         soundCorreto.play();
+        acertou++;  // Incrementa as respostas corretas
+        updateProgress();  // Atualiza a porcentagem
     } else {
         tentativas--;
         document.getElementById('tentativas').textContent = `Tentativas restantes: ${tentativas}`;
