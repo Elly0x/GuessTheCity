@@ -1,3 +1,8 @@
+let currentQuestionIndex = 0;
+let currentHintIndex = 0;
+let score = 0;
+let attempts = 0; // Contador de tentativas
+
 const questions = [
   {
     hints: [
@@ -9,203 +14,60 @@ const questions = [
   },
   {
     hints: [
-      "Esta cidade está localizada no Peru e foi a capital do Império Inca.",
-      "É famosa pela Plaza de Armas e por ser a porta de entrada para Machu Picchu.",
-      "É uma das cidades mais turísticas do Peru."
+      "Esta cidade está localizada na América do Sul e é conhecida como a 'Cidade Maravilhosa'.",
+      "É famosa pelo Cristo Redentor.",
+      "Foi sede dos Jogos Olímpicos de 2016"
     ],
-    answer: "Cusco"
+    answer: "Rio de Janeiro"
   },
-  {
-    hints: [
-      "Esta cidade está localizada na Colômbia e é conhecida por sua cultura vibrante e história colonial.",
-      "É famosa pelo centro histórico de La Candelaria e pelo Museu do Ouro.",
-      "É a capital da Colômbia."
-    ],
-    answer: "Bogotá"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Chile e é cercada pela Cordilheira dos Andes.",
-      "É famosa pelo Palácio de La Moneda e pelo Cerro San Cristóbal.",
-      "É a capital do Chile."
-    ],
-    answer: "Santiago"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Equador e é atravessada pela linha do Equador.",
-      "É famosa pela Plaza Grande e pelo monumento 'Mitad del Mundo'.",
-      "É a capital do Equador."
-    ],
-    answer: "Quito"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Uruguai e tem uma famosa orla chamada 'Rambla'.",
-      "É conhecida pelo Mercado del Puerto e pela Praça Independência.",
-      "É a capital do Uruguai."
-    ],
-    answer: "Montevidéu"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na Bolívia e é uma das capitais mais altas do mundo.",
-      "É famosa pelo teleférico e pelo Mercado das Bruxas.",
-      "Sede do governo boliviano, mas não é a capital constitucional."
-    ],
-    answer: "La Paz"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Paraguai e fica às margens do rio homônimo.",
-      "É famosa pelo Palácio de los López e pela Costanera.",
-      "É a capital do Paraguai."
-    ],
-    answer: "Assunção"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na Venezuela e é cercada por montanhas.",
-      "É famosa pelo Parque Nacional El Ávila e pela Plaza Bolívar.",
-      "É a capital da Venezuela."
-    ],
-    answer: "Caracas"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na América do Sul e tem um grande porto marítimo.",
-      "É conhecida pela cidade histórica e pelas muralhas coloniais.",
-      "É um dos principais destinos turísticos da Colômbia."
-    ],
-    answer: "Cartagena"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no sudeste do Brasil e é conhecida por ser o maior centro financeiro da América Latina.",
-      "É famosa pela Avenida Paulista e pelo MASP.",
-      "É a maior cidade do Brasil."
-    ],
-    answer: "São Paulo"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no nordeste do Brasil e é famosa pelo seu carnaval vibrante.",
-      "É conhecida pelo Pelourinho, um bairro histórico e Patrimônio da Humanidade.",
-      "É a capital da Bahia."
-    ],
-    answer: "Salvador"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no norte do Brasil e é conhecida por sua floresta tropical.",
-      "É famosa pelo Encontro das Águas e pela Arena da Amazônia.",
-      "É a capital do estado do Amazonas."
-    ],
-    answer: "Manaus"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no sul do Brasil e é famosa por sua culinária e arquitetura europeia.",
-      "É conhecida por ser a 'capital brasileira da cerveja' e pela Oktoberfest.",
-      "É a capital de Santa Catarina."
-    ],
-    answer: "Blumenau"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no centro-oeste do Brasil e é conhecida por ser a capital do país.",
-      "É famosa pelo Congresso Nacional e pela Praça dos Três Poderes.",
-      "É uma cidade planejada, projetada por Oscar Niemeyer e Lúcio Costa."
-    ],
-    answer: "Brasília"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no norte do Brasil e é a maior cidade do estado do Pará.",
-      "É famosa pelo Mercado Ver-o-Peso e pela Círio de Nazaré.",
-      "É um importante centro comercial da Amazônia."
-    ],
-    answer: "Belém"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no sul do Brasil e é conhecida por suas belezas naturais.",
-      "É famosa pelas Cataratas do Iguaçu e pela Itaipu Binacional.",
-      "Fica na tríplice fronteira entre Brasil, Argentina e Paraguai."
-    ],
-    answer: "Foz do Iguaçu"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no sul do Brasil e é famosa por sua arquitetura de estilo europeu.",
-      "É conhecida pela Rua das Pedras e pelas suas belas praias.",
-      "É a cidade mais famosa da Região dos Lagos do Rio de Janeiro."
-    ],
-    answer: "Búzios"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no sudeste do Brasil e é a maior cidade do estado de Minas Gerais.",
-      "É famosa pela sua gastronomia e pela arquitetura colonial.",
-      "É a cidade onde o famoso Inhotim, um museu de arte contemporânea, está localizado."
-    ],
-    answer: "Belo Horizonte"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no nordeste do Brasil e é famosa por suas praias de água quente.",
-      "É conhecida pelo Forte de São José e pela cidade histórica de Olinda.",
-      "É a capital de Pernambuco."
-    ],
-    answer: "Recife"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no sul do Brasil e é famosa pela sua rica cultura italiana.",
-      "É conhecida pelo Parque Nacional de Aparados da Serra e pelas belas paisagens.",
-      "É a capital do estado de Santa Catarina."
-    ],
-    answer: "Florianópolis"
-  },
-  // Cidades novas adicionadas
-  {
-    hints: [
-      "Esta cidade está localizada na Grécia e é considerada o berço da civilização ocidental.",
-      "É famosa pela Acrópole e o Partenon.",
-      "Foi a sede dos primeiros Jogos Olímpicos da era moderna."
-    ],
-    answer: "Atenas"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na Espanha e é conhecida pelo trabalho do arquiteto Antoni Gaudí.",
-      "É famosa pela Sagrada Família e pelo Parque Güell.",
-      "É uma cidade à beira-mar e é a capital da região da Catalunha."
-    ],
-    answer: "Barcelona"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Reino Unido e é a capital do país.",
-      "É famosa pelo Big Ben e pelo Palácio de Buckingham.",
-      "Possui uma das maiores e mais antigas estações de metrô do mundo."
-    ],
-    answer: "Londres"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na Itália e é conhecida pela sua história antiga.",
-      "É famosa pelo Coliseu, o Vaticano e pela Fontana di Trevi.",
-      "Foi o centro do Império Romano."
-    ],
-    answer: "Roma"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na Espanha e é a capital do país.",
-      "É famosa pelo Museu do Prado e pela Praça Maior.",
-      "É conhecida pelo Real Madrid, um dos maiores clubes de futebol do mundo."
-    ],
-    answer: "Madrid"
-  }
+  // Adicione mais cidades aqui...
 ];
+
+function displayHint() {
+  const hintElement = document.getElementById("hint");
+  hintElement.textContent = questions[currentQuestionIndex].hints[currentHintIndex];
+}
+
+function checkAnswer() {
+  const userAnswer = document.getElementById("answer").value.trim();
+  const correctAnswer = questions[currentQuestionIndex].answer;
+
+  if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+    document.getElementById("feedback").textContent = "Parabéns, você acertou!";
+    score += 1;
+    document.getElementById("percentage").textContent = `Porcentagem: ${(score / questions.length) * 100}%`;
+    document.getElementById("next-btn").classList.remove("hidden");  // O botão "Próxima pergunta" só aparece quando acertar
+  } else {
+    attempts += 1; // Incrementa o contador de tentativas
+    document.getElementById("feedback").textContent = `Resposta errada, você tem ${5 - attempts} tentativas restantes.`;
+    
+    if (attempts >= 5) {
+      // Se as tentativas se esgotarem
+      document.getElementById("feedback").textContent = `Você não conseguiu! A resposta era: ${correctAnswer}`;
+      document.getElementById("next-btn").classList.remove("hidden"); // O botão "Próxima pergunta" aparece
+    } else {
+      // Caso o jogador ainda tenha tentativas
+      currentHintIndex += 1;
+      if (currentHintIndex < questions[currentQuestionIndex].hints.length) {
+        displayHint(); // Mostra a próxima dica
+      }
+    }
+  }
+}
+
+function nextQuestion() {
+  currentQuestionIndex += 1;
+  currentHintIndex = 0;
+  attempts = 0; // Reseta o contador de tentativas
+  if (currentQuestionIndex < questions.length) {
+    displayHint(); // Exibe a primeira dica da próxima pergunta
+    document.getElementById("answer").value = ""; // Limpa o campo de resposta
+    document.getElementById("feedback").textContent = ""; // Limpa o feedback
+    document.getElementById("next-btn").classList.add("hidden"); // Esconde o botão "Próxima pergunta" até que o jogador acerte
+  } else {
+    document.getElementById("feedback").textContent = "Você completou todas as perguntas! Sua pontuação final é " + score;
+    document.getElementById("next-btn").classList.add("hidden"); // Esconde o botão ao final do jogo
+  }
+}
+
+displayHint(); // Exibe a primeira dica ao carregar o jogo
