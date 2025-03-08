@@ -1,86 +1,6 @@
 const questions = [
   {
     hints: [
-      "Esta cidade está localizada na América do Sul e é a capital da Argentina.",
-      "É famosa pelo tango e pelo bairro colorido de La Boca.",
-      "O time de futebol Boca Juniors, um dos mais conhecidos do mundo, nasceu aqui."
-    ],
-    answer: "Buenos Aires"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Peru e foi a capital do Império Inca.",
-      "É famosa pela Plaza de Armas e por ser a porta de entrada para Machu Picchu.",
-      "É uma das cidades mais turísticas do Peru."
-    ],
-    answer: "Cusco"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na Colômbia e é conhecida por sua cultura vibrante e história colonial.",
-      "É famosa pelo centro histórico de La Candelaria e pelo Museu do Ouro.",
-      "É a capital da Colômbia."
-    ],
-    answer: "Bogotá"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Chile e é cercada pela Cordilheira dos Andes.",
-      "É famosa pelo Palácio de La Moneda e pelo Cerro San Cristóbal.",
-      "É a capital do Chile."
-    ],
-    answer: "Santiago"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Equador e é atravessada pela linha do Equador.",
-      "É famosa pela Plaza Grande e pelo monumento 'Mitad del Mundo'.",
-      "É a capital do Equador."
-    ],
-    answer: "Quito"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Uruguai e tem uma famosa orla chamada 'Rambla'.",
-      "É conhecida pelo Mercado del Puerto e pela Praça Independência.",
-      "É a capital do Uruguai."
-    ],
-    answer: "Montevidéu"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na Bolívia e é uma das capitais mais altas do mundo.",
-      "É famosa pelo teleférico e pelo Mercado das Bruxas.",
-      "Sede do governo boliviano, mas não é a capital constitucional."
-    ],
-    answer: "La Paz"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no Paraguai e fica às margens do rio homônimo.",
-      "É famosa pelo Palácio de los López e pela Costanera.",
-      "É a capital do Paraguai."
-    ],
-    answer: "Assunção"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na Venezuela e é cercada por montanhas.",
-      "É famosa pelo Parque Nacional El Ávila e pela Plaza Bolívar.",
-      "É a capital da Venezuela."
-    ],
-    answer: "Caracas"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada na América do Sul e tem um grande porto marítimo.",
-      "É conhecida pela cidade histórica e pelas muralhas coloniais.",
-      "É um dos principais destinos turísticos da Colômbia."
-    ],
-    answer: "Cartagena"
-  },
-  {
-    hints: [
       "Esta cidade está localizada no sudeste do Brasil e é conhecida por ser o maior centro financeiro da América Latina.",
       "É famosa pela Avenida Paulista e pelo MASP.",
       "É a maior cidade do Brasil."
@@ -106,7 +26,7 @@ const questions = [
   {
     hints: [
       "Esta cidade está localizada no sul do Brasil e é famosa por sua culinária e arquitetura europeia.",
-      "É conhecida por ser a 'capital brasileira da cerveja' e pela Oktoberfest.",
+      "É conhecida pela Oktoberfest e pelo Parque Nacional de Aparados da Serra.",
       "É a capital de Santa Catarina."
     ],
     answer: "Blumenau"
@@ -129,19 +49,11 @@ const questions = [
   },
   {
     hints: [
-      "Esta cidade está localizada no sul do Brasil e é conhecida por suas belezas naturais.",
+      "Esta cidade está localizada no sul do Brasil e é famosa pelas suas belezas naturais.",
       "É famosa pelas Cataratas do Iguaçu e pela Itaipu Binacional.",
       "Fica na tríplice fronteira entre Brasil, Argentina e Paraguai."
     ],
     answer: "Foz do Iguaçu"
-  },
-  {
-    hints: [
-      "Esta cidade está localizada no sul do Brasil e é famosa por sua arquitetura de estilo europeu.",
-      "É conhecida pela Rua das Pedras e pelas suas belas praias.",
-      "É a cidade mais famosa da Região dos Lagos do Rio de Janeiro."
-    ],
-    answer: "Búzios"
   },
   {
     hints: [
@@ -161,52 +73,91 @@ const questions = [
   },
   {
     hints: [
-      "Esta cidade está localizada no sul do Brasil e é famosa pela sua rica cultura italiana.",
+      "Esta cidade está localizada no sul do Brasil e é conhecida por sua rica cultura italiana.",
       "É conhecida pelo Parque Nacional de Aparados da Serra e pelas belas paisagens.",
       "É a capital do estado de Santa Catarina."
     ],
     answer: "Florianópolis"
   },
-  // Cidades internacionais
   {
     hints: [
-      "Esta cidade está localizada na Grécia e é considerada o berço da civilização ocidental.",
-      "É famosa pela Acrópole e o Partenon.",
-      "Foi a sede dos primeiros Jogos Olímpicos da era moderna."
+      "Esta cidade está localizada no sudeste do Brasil e é famosa por ser um destino turístico popular, com praias e vida noturna.",
+      "É famosa pelas praias de Copacabana e Ipanema.",
+      "É a cidade-sede de um dos maiores carnavais do mundo."
     ],
-    answer: "Atenas"
+    answer: "Rio de Janeiro"
   },
   {
     hints: [
-      "Esta cidade está localizada na Espanha e é conhecida pelo trabalho do arquiteto Antoni Gaudí.",
-      "É famosa pela Sagrada Família e pelo Parque Güell.",
-      "É uma cidade à beira-mar e é a capital da região da Catalunha."
+      "Esta cidade está localizada no centro-oeste do Brasil e é conhecida como a capital do agronegócio.",
+      "É famosa pelo Mercado Municipal e pelo Parque Nacional de Chapada dos Guimarães.",
+      "É a capital de Mato Grosso."
     ],
-    answer: "Barcelona"
+    answer: "Cuiabá"
   },
   {
     hints: [
-      "Esta cidade está localizada no Reino Unido e é a capital do país.",
-      "É famosa pelo Big Ben e pelo Palácio de Buckingham.",
-      "Possui uma das maiores e mais antigas estações de metrô do mundo."
+      "Esta cidade está localizada no norte do Brasil e é famosa pela sua arquitetura colonial.",
+      "É a capital do estado do Acre.",
+      "É uma das cidades mais conhecidas da Região Norte do Brasil."
     ],
-    answer: "Londres"
+    answer: "Rio Branco"
   },
   {
     hints: [
-      "Esta cidade está localizada na Itália e é conhecida pela sua história antiga.",
-      "É famosa pelo Coliseu, o Vaticano e pela Fontana di Trevi.",
-      "Foi o centro do Império Romano."
+      "Esta cidade está localizada no nordeste do Brasil e é conhecida por sua rica história e por ser um importante polo comercial.",
+      "É famosa pelo Mercado Central e pelo Museu do Frevo.",
+      "É a capital de Alagoas."
     ],
-    answer: "Roma"
+    answer: "Maceió"
   },
   {
     hints: [
-      "Esta cidade está localizada na Espanha e é a capital do país.",
-      "É famosa pelo Museu do Prado e pela Praça Maior.",
-      "É conhecida pelo Real Madrid, um dos maiores clubes de futebol do mundo."
+      "Esta cidade está localizada no sudeste do Brasil e é famosa pela sua importância histórica.",
+      "É conhecida pelo Museu Paulista e pelo Parque da Independência.",
+      "É a cidade onde foi proclamada a Independência do Brasil."
     ],
-    answer: "Madrid"
+    answer: "São Bernardo do Campo"
+  },
+  {
+    hints: [
+      "Esta cidade está localizada no norte do Brasil e é conhecida por sua forte influência cultural indígena.",
+      "É famosa pelo Mercado Municipal e pela Catedral de Nossa Senhora de Nazaré.",
+      "É a capital do estado do Tocantins."
+    ],
+    answer: "Palmas"
+  },
+  {
+    hints: [
+      "Esta cidade está localizada no sudeste do Brasil e é famosa pelas suas termas e belezas naturais.",
+      "É conhecida pelas águas termais e pelo Parque Nacional da Serra da Canastra.",
+      "É uma cidade histórica localizada no estado de Minas Gerais."
+    ],
+    answer: "Poços de Caldas"
+  },
+  {
+    hints: [
+      "Esta cidade está localizada no centro-oeste do Brasil e é famosa por ser um polo industrial.",
+      "É conhecida pelo Parque Nacional das Emas e pelo Mercado Municipal.",
+      "É a capital do estado de Goiás."
+    ],
+    answer: "Goiânia"
+  },
+  {
+    hints: [
+      "Esta cidade está localizada no nordeste do Brasil e é famosa por suas praias paradisíacas.",
+      "É conhecida por ser um importante destino turístico e pela vida noturna.",
+      "É a capital do estado da Paraíba."
+    ],
+    answer: "João Pessoa"
+  },
+  {
+    hints: [
+      "Esta cidade está localizada no nordeste do Brasil e é famosa por suas praias.",
+      "É conhecida pela Praia de Pajuçara e pela Fortaleza de Santo Antônio.",
+      "É a capital do estado de Alagoas."
+    ],
+    answer: "Maceió"
   }
 ];
 
@@ -241,7 +192,7 @@ const loadQuestion = () => {
   resultMessage.textContent = "";
   answerInput.value = "";
   
-  questionElement.textContent = currentQuestion.hints[0];
+  questionElement.textContent = "Adivinhe a cidade!";
   hintElement.textContent = currentQuestion.hints.join(" | ");
 };
 
@@ -258,4 +209,19 @@ const checkAnswer = () => {
     attempts++;
     attemptsElement.textContent = `Tentativas: ${attempts}/5`;
     if (attempts >= 5) {
-      resultMessage.textContent = "Você errou! Fim de J
+      resultMessage.textContent = `Você errou! A resposta era: ${currentQuestion.answer}`;
+      resultMessage.style.color = "red";
+      nextButton.style.display = "block";
+    }
+  }
+};
+
+const nextQuestion = () => {
+  currentQuestionIndex++;
+  loadQuestion();
+};
+
+checkButton.addEventListener("click", checkAnswer);
+nextButton.addEventListener("click", nextQuestion);
+
+startGame();
