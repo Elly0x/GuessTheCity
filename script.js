@@ -171,7 +171,6 @@ const questions = [
     ],
     answer: "Florianópolis"
   },
-  // Cidades novas adicionadas
   {
     hints: [
       "Esta cidade está localizada na Grécia e é considerada o berço da civilização ocidental.",
@@ -215,21 +214,35 @@ const questions = [
 ];
 
 function displayHint() {
-    const hintElement = document.getElementById("hint");
-    hintElement.textContent = questions[currentQuestionIndex].hints[currentHintIndex];
+  const hintElement = document.getElementById("hint");
+  hintElement.textContent = questions[currentQuestionIndex].hints[currentHintIndex];
 }
 
 function updateAttempts() {
-    const attemptsElement = document.getElementById("attempts");
-    attemptsElement.textContent = `Tentativas restantes: ${attemptsLeft}`;
+  const attemptsElement = document.getElementById("attempts");
+  attemptsElement.textContent = `Tentativas restantes: ${attemptsLeft}`;
 }
 
 function checkAnswer() {
-    const answer = document.getElementById("answer").value.trim().toLowerCase();
-    const feedbackElement = document.getElementById("feedback");
+  const answer = document.getElementById("answer").value.trim().toLowerCase();
+  const feedbackElement = document.getElementById("feedback");
 
-    if (answer === questions[currentQuestionIndex].answer.toLowerCase()) {
-        feedbackElement.textContent = "Resposta correta!";
-        feedbackElement.style.color = "green";
-        document.getElementById("next-btn").classList.remove("hidden");
-        document.getElementById("next-btn").disabled =
+  if (answer === questions[currentQuestionIndex].answer.toLowerCase()) {
+    feedbackElement.textContent = "Resposta correta!";
+    feedbackElement.style.color = "green";
+    document.getElementById("next-btn").classList.remove("hidden");
+    document.getElementById("next-btn").disabled = false;
+  } else {
+    attemptsLeft--;
+    feedbackElement.textContent = `Resposta incorreta! Você tem ${attemptsLeft} tentativas restantes.`;
+    feedbackElement.style.color = "red";
+    if (attemptsLeft === 0) {
+      feedbackElement.textContent = `Você perdeu! A resposta correta era: ${questions[currentQuestionIndex].answer}`;
+      document.getElementById("next-btn").classList.remove("hidden");
+      document.getElementById("next-btn").disabled = false;
+    }
+    updateAttempts();
+  }
+}
+
+function nextQuestion
