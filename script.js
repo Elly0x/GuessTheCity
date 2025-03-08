@@ -47,17 +47,3 @@ function checkAnswer() {
         feedback.innerHTML = "✅ Correto!";
         feedback.style.color = "green";
         corretoAudio.play();
-        correctAnswers++;
-        progress += 10;
-    } else {
-        feedback.innerHTML = "❌ Errado! A resposta era: " + questions[currentQuestion].answer;
-        feedback.style.color = "red";
-        erradoAudio.play();
-    }
-
-    // Atualizar a porcentagem
-    progressElement.textContent = "Progresso: " + progress + "%";
-
-    // Esconder o campo de resposta e mostrar o botão de próxima pergunta
-    document.getElementById("answer").classList.add("hidden");
-    document.querySelector("button").classList.add("
