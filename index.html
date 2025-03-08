@@ -9,15 +9,16 @@
 <body>
     <div class="container">
         <h1>Guess The City</h1>
-        <p id="hint">Dica: </p> <!-- A dica será atualizada aqui -->
+        <p id="hint"></p>
         <input type="text" id="answer" placeholder="Digite sua resposta">
         <button onclick="checkAnswer()">Verificar</button>
-        <p id="feedback"></p> <!-- Feedback do jogo (acerto ou erro) -->
-        <button id="next-btn" class="hidden" onclick="nextQuestion()">Próxima</button>
-        <p id="percentage" class="hidden"></p>
-        <p id="progress"></p>
+        <div id="feedback"></div>
+        <div id="progress-container">
+            <div id="percentage">Porcentagem: 0%</div>
+            <div id="progress">0</div>
+        </div>
+        <button id="next-btn" class="hidden" onclick="nextQuestion()">Próxima pergunta</button>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
